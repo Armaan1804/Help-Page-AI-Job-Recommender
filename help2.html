@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Gap Analysis - PM Internship AI Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B35',
+                        secondary: '#1a1a1a',
+                        accent: '#F0F2F6',
+                        charcoal: '#4a4e69',
+                        charcoalGray: '#36454F'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .streamlit-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark {
+            background: #1a1a1a !important;
+            color: #ffffff;
+        }
+
+        .dark body {
+            background: #1a1a1a !important;
+        }
+
+        .dark .bg-white {
+            background-color: #2d2d44 !important;
+        }
+
+        .dark .bg-gray-50 {
+            background-color: #4a4e69 !important;
+        }
+
+        .dark .text-gray-600 {
+            color: #cccccc !important;
+        }
+
+        .dark .text-gray-700 {
+            color: #ffffff !important;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FF6B35;
+            border-radius: 20px;
+        }
+
+        .dynamic-island {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+            color: #6b7280;
+            font-weight: 500;
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ff6b35;
+            background: rgba(255, 107, 53, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 9999px;
+            padding: 0.5rem;
+            font-size: 0.75rem;
+            color: #6b7280;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .dark .nav-link {
+            color: #d1d5db;
+        }
+
+        .dark .nav-control {
+            background: rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #d1d5db;
+        }
+
+        section {
+            scroll-margin-top: 120px;
+        }
+
+        .screenshot-container {
+            border: 2px solid #FF6B35;
+            border-radius: 12px;
+            padding: 0;
+            background: linear-gradient(135deg, #ffffff 0%, #fff5f0 50%, #ffede0 100%);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dark .screenshot-container {
+            background: #2d2d44;
+        }
+
+        .upload-area {
+            border: 2px dashed #FF6B35;
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .upload-area:hover {
+            background: rgba(255, 107, 53, 0.05);
+        }
+
+        .screenshot-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body style="background: linear-gradient(135deg, #ffffff 0%, #fff5f0 50%, #ffede0 100%);"
+    class="dark:bg-secondary text-gray-900 dark:text-white min-h-screen">
+
+
+    <!-- Hero Section -->
+    <section class="relative text-gray-800 overflow-hidden pt-16 pb-16">
+        <div class="streamlit-container relative z-10">
+            <div class="text-center mb-16">
+                
+
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+                    <span class="text-gray-800">AI Job Recommender</span><br>
+                    <span class="text-primary">How It Works</span>
+                </h1>
+
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
+                    Our AI Job Recommender is here to help you recommend you jobs based on your resume.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 1 -->
+    <section id="role" class="py-16">
+        <div class="streamlit-container">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="screenshot-container">
+                    <img src="/img/WhatsApp Image 2025-09-20 at 12.15.49 (5).jpeg" alt="Role Selection Interface"
+                        class="screenshot-img">
+                </div>
+
+                <div>
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-briefcase text-primary text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-6">1. Upload Your Resume</h2>
+                    <div class="space-y-4">
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                                <li>• The first step is to upload you resume on the "Browse files" Button.</li>
+                                <li>• Select your resume.</li>
+                                <li>• In the end, click on "upload" to upload you resume</li>
+                            </ul>
+                        </p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+     <!-- Step 2 -->
+    <section id="role" class="py-16 bg-white dark:bg-gray-800 border-t border-orange-500">
+        <div class="streamlit-container">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                
+
+                <div>
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-briefcase text-primary text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-6">2. Get your Resume Summary </h2>
+                    <div class="space-y-4">
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                                <li>Scroll Down and our AI Job Recommender will give you the summary of your Resume</li>
+                            </ul>
+                        </p>
+                        
+                    </div>
+                </div>
+                <div class="screenshot-container">
+                    <img src="/img/image.png" alt="Role Selection Interface"
+                        class="screenshot-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Step 3 -->
+    <section id="company" class="py-16">
+        <div class="streamlit-container">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                
+                <div class="screenshot-container">
+                    <img src="img/Screenshot 2025-09-20 134839.png" alt="Role Selection Interface"
+                        class="screenshot-img">
+                </div>
+
+                <div>
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-briefcase text-primary text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-6">3. Find your Skill Gaps and Missing Areas</h2>
+                    <div class="space-y-4">
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                                <li>Scroll Down Further and our AI Job Recommender will give you the summary of your Skill gaps and Missing Areas in your Resume.</li>
+                                
+                            </ul>
+                        </p>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 4 -->
+    <section id="company" class="py-16 bg-white dark:bg-gray-800 border-t border-orange-500">
+        <div class="streamlit-container">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-briefcase text-primary text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-6">4. Click on Get Job Recommendations
+                    <div class="space-y-4">
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                                <li>• The next step is to click "Get Job Recommendations" Button.</li>
+                                <li>• It will show you your extracted keywords from you resume</li>
+                                <li>• In the end, upload your resume</li>
+                            </ul>
+                        </p>
+                        
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 screenshot-container">
+                    <div class="w-full h-full flex items-center justify-center">
+                        <img src="img/Untitled.png" alt="Role Selection Interface"
+                        class="screenshot-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step 5 -->
+    <section id="role" class="py-16">
+        <div class="streamlit-container">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="screenshot-container">
+                    <img src="/img/Screenshot 2025-09-20 135237.png" alt="Role Selection Interface"
+                        class="screenshot-img">
+                </div>
+
+                <div>
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-briefcase text-primary text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-6">5. View your Job Recommendations </h2>
+                    <div class="space-y-4">
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                                <li>• After Clicking on Get Job Recommendations.</li>
+                                <li>• Scroll Down Further and our AI Job Recommender will give provide you with your Job Recommendations.</li>
+                                <li>• Select your resume.</li>
+                            </ul>
+                        </p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+
+
+</div>
+</section>
+
+
+
+
+
+
+
+<!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="streamlit-container">
+            <div class="text-center space-y-4">
+                <a href="https://chatbot-sih-theta.vercel.app/" class="inline-flex items-center bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+                    <i class=" mr-2"></i>Back to Home
+                </a>
+                <p class="text-sm text-gray-400">© 2024 PM-INTERNSHIP, All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    
+
+
+</script>
+</body>
+
+</html>
